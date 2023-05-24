@@ -7,7 +7,7 @@ function Login() {
         <div className="">
             <div className="relative">
                 <img className="w-full h-[100vh]" src={BackGround} alt="Background" />
-                {/* <div className="absolute border-2 border-blue-700 bg-blue-500 w-[25rem] h-[20rem] rounded-xl top-1/2 left-3/4 transform -translate-x-1/2 -translate-y-1/2 opacity-90">
+                <div className="absolute border-2 border-blue-700 bg-blue-500 w-[25rem] h-[20rem] rounded-xl top-1/2 left-3/4 transform -translate-x-1/2 -translate-y-1/2 opacity-90">
                     <div className="flex justify-center mt-4">
                         <h1 className="text-4xl font-bold text-white">Đăng nhập</h1>
                     </div>
@@ -39,7 +39,7 @@ function Login() {
                             Đăng nhập
                         </button>
                     </div>
-                </div> */}
+                </div>
                 <div className="absolute flex bg-blue-600 w-full h-[5rem] top-0">
                     <div className="flex justify-center w-20 h-20 ml-80">
                         <img className="bg-white" src={Logo} alt="Logo" />
