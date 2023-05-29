@@ -1,7 +1,10 @@
 import React from "react";
 import Home from "./Home/home";
-import NavBar from "./page/NavBar/navbar";
+import NavBar from "./page/Home/Components/NavBar";
 import Login from "./page/Login/login";
+import PieChart from "./page/Home/Components/Pie_Chart";
+import ListWork from "./page/ListWork/listwork"
+
 
 const routes = [
   {
@@ -18,6 +21,16 @@ const routes = [
     path: "/login",
     exact: true,
     main: () => <Login />,
+  },
+  {
+    path: "/pie-chat",
+    exact: true,
+    main: () => <PieChart />,
+  },
+  {
+    path: "/list-work",
+    exact: true,
+    main: () => <ListWork />,
   },
 ];
 

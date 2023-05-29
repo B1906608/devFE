@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import Logo from "../../img/Logo_VNPT.png";
-import { Link } from "react-router-dom";
+import Logo from "../../../img/Logo_VNPT.png";
 import { AiOutlinePlusSquare, AiOutlineMinusSquare } from "react-icons/ai";
-import { RxCaretRight, RxCaretDown } from "react-icons/rx";
+// import { RxCaretRight, RxCaretDown } from "react-icons/rx";
 
 function NavBar () {
     const [showOptions, setShowOptions] = useState(false);
     const [showChart, setShowChart] = useState(false);
 
-    function toggleOptions() {
+    function toggleOptions() {  
         setShowOptions(!showOptions);
     }
 
