@@ -14,7 +14,7 @@ function Pie_Chart_Sum() {
         { name: "Công việc chưa hoàn thành", value: 15 },
     ];
 
-    var COLORS = ["#3e92cc", "#8ac926",];
+    var COLORS = ["#3e92cc", "#8ac926"];
     const renderCustom = ({
         cx,
         cy,
@@ -44,20 +44,20 @@ function Pie_Chart_Sum() {
     };
 
     return (
-        <div className="w-[55vw]">
+        <div className="w-[50vw] pl-[4vw]">
             <br/>
-            <div className="m-auto w-3/4 mb-5 border border-black rounded-xl">
-                <h3 className="text-center">
-                    Tổng số công viêc trong tháng 5
+            <div className="w-[45vw] mb-5 border border-black rounded-xl">
+                <h3 className="text-center text-2xl font-bold">
+                    Tổng số công viêc và trạng thái công việc trong tháng 5
                 </h3>
-                <PieChart width={550} height={450}>
+                <PieChart width={870} height={500}>
                     <Pie
                         data={data_pie_chart_sum}
                         isAnimationActive={true} // Animation
                         cx="50%"
                         cy="50%"
                         label={renderCustom}
-                        outerRadius={160}
+                        outerRadius={190}
                         fill="#8884d8"
                         dataKey="value"
                     >
@@ -69,7 +69,7 @@ function Pie_Chart_Sum() {
                         ))}
                     </Pie>
                     <Legend />
-                </PieChart>{" "}
+                </PieChart>
             </div>
         </div>
     );

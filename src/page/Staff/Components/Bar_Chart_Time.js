@@ -67,16 +67,16 @@ function Bar_Chart_Time() {
     // const domainMax = dataMax + 15; // tăng giá trị lớn nhất thêm 5
     
     return (
-        <div className="w-[55vw]">
+        <div className="w-[50vw] pl-[4vw]">
             <br/>
-            <div className="m-auto w-3/4 p-0 mb-5 border border-black rounded-xl">
-                <h3 className="text-center">
+            <div className="w-[45vw] p-0 mb-5 border border-black rounded-xl">
+                <h3 className="text-center text-2xl font-bold">
                     Thời gian thực hiện của các công việc trong tháng 5 là : 200 giờ
                 </h3>
-                <div className="w-full h-[550px]">
-                    <ComposedChart width={500} height={550} data={data_bar_chart_time}>
+                <div className="w-full h-[500px]">
+                    <ComposedChart width={800} height={500} data={data_bar_chart_time}>
                         <CartesianGrid stroke="#f5f5f5" />
-                        <XAxis dataKey="name" interval={0} angle={70} tickMargin={50} height={100} />
+                        <XAxis dataKey="name" interval={0} angle={70} tickMargin={70} height={150} />
                         <YAxis />
                         <Bar dataKey="Số_Giờ" barSize={barSize}>
                             {data_bar_chart_time.map((entry, index) => {

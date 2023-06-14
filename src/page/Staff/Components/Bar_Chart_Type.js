@@ -14,23 +14,27 @@ function Bar_Chart_Type() {
     //bar-chart
     var data_bar_chart = [
         {
-            name: "Lập trình",
+            name: "Phòng giải pháp",
             Số_Giờ: 41,
         },
         {
-            name: "Triển khai",
+            name: "Phòng triển khai",
             Số_Giờ: 40,
         },
         {
-            name: "Hỗ trợ",
+            name: "Phòng hỗ trợ",
             Số_Giờ: 35,
         },
         {
-            name: "Viết báo cáo",
+            name: "Phòng kỹ thuật",
             Số_Giờ: 26,
         },
         {
-            name: "Lập kế hoạch",
+            name: "Phòng kế hoạch",
+            Số_Giờ: 17,
+        },
+        {
+            name: "TT - CNTT",
             Số_Giờ: 17,
         },
     ];
@@ -38,16 +42,16 @@ function Bar_Chart_Type() {
     const barSize = data_bar_chart.length <= 10 ? 50 : data_bar_chart.length <= 30 ? 30 : 15;
 
     return (
-        <div className="w-[55vw]">
+        <div className="w-[50vw] ml-[2vw] pr-[4vw]">
             <br/>
-            <div className="m-auto w-3/4 p-0 mb-5 border border-black rounded-xl">
-                <h3 className="text-center">
+            <div className="w-[45vw] p-0 mb-5 border border-black rounded-xl">
+                <h3 className="text-center text-2xl font-bold">
                     Tỉ lệ loại công việc theo giờ đã được giao trong tháng 5
                 </h3>
-                <div className="w-full h-[550px]">
-                    <ComposedChart width={500} height={550} data={data_bar_chart}>
+                <div className="w-full h-[500px]">
+                    <ComposedChart width={800} height={500} data={data_bar_chart}>
                         <CartesianGrid stroke="#f5f5f5" />
-                        <XAxis dataKey="name" interval={0} angle={70} tickMargin={50} height={100} />
+                        <XAxis dataKey="name" interval={0} angle={60} tickMargin={70} height={150} />
                         <YAxis />
                         <Bar dataKey="Số_Giờ" barSize={barSize}>
                             {data_bar_chart.map((entry, index) => {
