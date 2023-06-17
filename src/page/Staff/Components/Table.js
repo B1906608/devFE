@@ -30,7 +30,7 @@ function createData(name, calories, fat, carbs, protein, price) {
         id: 1,
         title: "Lập trình 2 chức năng",
         actor: "Nguyen Van A",
-        time: "11 giờ",
+        time: "11",
         deadline: "15/06/2023",
         completionTime: "14/06/2023",
         status: "Chưa hoàn thành",
@@ -40,7 +40,7 @@ function createData(name, calories, fat, carbs, protein, price) {
         id: 6,
         title: "Lập trình 1 chức năng",
         actor: "Nguyen Van A",
-        time: "2 giờ",
+        time: "2",
         deadline: "15/05/2023",
         completionTime: "24/05/2023",
         status: "Quá hạn",
@@ -50,7 +50,7 @@ function createData(name, calories, fat, carbs, protein, price) {
         id: 3,
         title: "Lập trình 1 chức năng",
         actor: "Nguyen Van A",
-        time: "2 giờ",
+        time: "2",
         deadline: "15/05/2023",
         completionTime: "24/05/2023",
         status: "Quá hạn",
@@ -59,6 +59,28 @@ function createData(name, calories, fat, carbs, protein, price) {
     ],
   };
 }
+
+const rows = [
+  createData(
+    "Lập trình 4 chức năng",
+    "2",
+    "15/06/2023",
+    "14/06/2023",
+    "Chưa hoàn thành",
+    "90%"
+  ),
+  createData(
+    "Triển khai",
+    "2",
+    "15/05/2023",
+    "24/05/2023",
+    "Chưa hoàn thành",
+    "10%"
+  ),
+  createData("Hổ trợ", "2", "15/05/2023", "14/05/2023", "Quá hạn", "82%"),
+  createData("Viết báo cáo", "2", "15/06/2023", "24/05/2023", "Quá hạn", "93%"),
+  createData("Lập kế hoạch", "2", "15/05/2023", "04/05/2023", "Quá hạn", "87%"),
+];
 
 function Row(props) {
   const { row } = props;
@@ -205,27 +227,6 @@ function Row(props) {
     </>
   );
 }
-const rows = [
-  createData(
-    "Lập trình 4 chức năng",
-    "2 giờ",
-    "15/06/2023",
-    "14/06/2023",
-    "Chưa hoàn thành",
-    "90%"
-  ),
-  createData(
-    "Triển khai",
-    "2 giờ",
-    "15/05/2023",
-    "24/05/2023",
-    "Quá hạn",
-    "10%"
-  ),
-  createData("Hổ trợ", 262, 16.0, 24, 6.0, 3.79),
-  createData("Cupcake", 305, 3.7, 67, 4.3, 2.5),
-  createData("Gingerbread", 356, 16.0, 49, 3.9, 1.5),
-];
 
 export default function CollapsibleTable() {
   function exportToExcel() {
@@ -237,24 +238,6 @@ export default function CollapsibleTable() {
     const filename = `Danh sách công việc - ${date}.xlsx`;
     XLSX.writeFile(workbook, filename);
   }
-
-  const [showOptionsTime, setShowOptionsTime] = useState(false);
-
-  function toggleOptionsTime() {
-    setShowOptionsTime(!showOptionsTime);
-  }
-
-  function handleOptionTimeClick(option) {
-    console.log(`Selected option: ${option}`);
-    setShowOptionsTime(false);
-  }
-
-  const [rows, setRows] = useState([]);
-
-  // useEffect(async function () {
-  //   let res = await CallApi("nhanvien", "GET");
-  //   console.log(res.data.cvcha);
-  // }, []);
 
   return (
     <div className="w-full">

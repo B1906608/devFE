@@ -13,51 +13,10 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { BiFirstPage, BiLastPage } from "react-icons/bi";
 import { GrFormNext, GrFormPrevious } from "react-icons/gr";
+import CallApi from "../../../../API/CallAPI";
 import Row from "./Row";
 import Excel from "./exportExcel";
 import Sort from "./Sort";
-
-function createData(name, calories, fat, carbs, protein, price) {
-  return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
-    price,
-    workSmall: [
-      {
-        id: 1,
-        title: "Lập trình 2 chức năng",
-        time: "11 giờ",
-        deadline: "15/06/2023",
-        completionTime: "14/06/2023",
-        status: "Chưa hoàn thành",
-        progress: "90",
-      },
-      {
-        id: 6,
-        title: "Lập trình 1 chức năng",
-        time: "2 giờ",
-        deadline: "15/05/2023",
-        completionTime: "24/05/2023",
-        status: "Quá hạn",
-        progress: "10",
-      },
-      {
-        id: 3,
-        title: "Lập trình 1 chức năng",
-        time: "12 giờ",
-        deadline: "15/05/2023",
-        completionTime: "24/05/2023",
-        status: "Quá hạn",
-        progress: "10",
-      },
-    ],
-  };
-}
-
-const rows = [createData()];
 
 export default function CollapsibleTable() {
   return (
@@ -131,13 +90,14 @@ HandlePagination.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-function CustomPagination() {
+function CustomPagination(props) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowData, setRowData] = useState([]);
 
-  // Avoid a layout jump when reaching the last page with empty rows.
+  // Avoid a layout jump when reaching the last page with empty rowData.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rowData.length) : 0;
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -148,17 +108,33 @@ function CustomPagination() {
     setPage(0);
   };
 
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        let res = await CallApi("nvbang", "GET");
+        console.log(res.data);
+        setRowData(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchData();
+  }, []);
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
         <TableBody>
           {(rowsPerPage > 0
-            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : rows
-          ).map((row, index) => (
-            <Row key={row.name} row={row} index={index} />
+            ? rowData.slice(
+                page * rowsPerPage,
+                page * rowsPerPage + rowsPerPage
+              )
+            : rowData
+          ).map((cvCha, index) => (
+            <Row key={cvCha.name} row={cvCha} index={index} />
           ))}
-
           {emptyRows > 0 && (
             <TableRow style={{ height: 53 * emptyRows }}>
               <TableCell colSpan={6} />
@@ -170,12 +146,12 @@ function CustomPagination() {
             <TablePagination
               rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
               colSpan={6}
-              count={rows.length}
+              count={rowData.length}
               rowsPerPage={rowsPerPage}
               page={page}
               SelectProps={{
                 inputProps: {
-                  "aria-label": "rows per page",
+                  "aria-label": "row per page",
                 },
                 native: true,
               }}

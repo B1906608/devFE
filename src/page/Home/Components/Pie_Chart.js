@@ -6,13 +6,28 @@ import { PieChart, Pie, Cell } from "recharts";
 function Pie_Chart() {
   const [chart, setChart] = useState([]);
 
-  const data_pie_chart = chart.map((x) => x.name);
+  // const data_pie_chart = chart.map(
+  //   (x) => x.name,
+  //   (y) => y.value
+  // );
+
+  const data_pie_chart = [
+    { name: "Hoàn thành", value: 30 },
+    { name: "HT quá hạn", value: 15 },
+  ];
 
   useEffect(() => {
-    const item = sessionStorage.getItem("item");
-    CallApi(`nvtron${item}`, "GET").then((res) => {
-      setChart(res?.data?.ListWork || []);
-    });
+    async function fetchData() {
+      try {
+        let res = await CallApi("nvtron", "GET");
+        console.log(res.data);
+        setChart(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchData();
   }, []);
 
   const COLORS = ["#91cc75", "#ee6766"];

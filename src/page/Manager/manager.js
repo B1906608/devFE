@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Header from "./Components/Header";
 import Table from "./Components/Table";
-import Pie_Chart_Sum from "./Components/Pie_Chart_Sum";
-import Bar_Chart_Type from "./Components/Bar_Chart_Type";
+import Pie_Manager from "./Components/Pie_Manager";
+import Bar_Manager from "./Components/Bar_Manager";
 
 function Home() {
   return (
@@ -17,10 +17,10 @@ function Home() {
         </div>
         <div className="flex justify-center items-center">
           <div>
-            <Bar_Chart_Type />
+            <Bar_Manager />
           </div>
           <div>
-            <Pie_Chart_Sum />
+            <Pie_Manager />
           </div>
         </div>
       </div>

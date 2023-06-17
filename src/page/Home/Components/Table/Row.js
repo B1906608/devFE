@@ -13,17 +13,17 @@ import { GrNext } from "react-icons/gr";
 import moment from "moment";
 import CallApi from "../../../../API/CallAPI";
 
-function Row(props) {
-  const { row } = props;
+function Row() {
   const [open, setOpen] = useState(false);
-  const [apiResults, setApiResults] = useState([]);
+  const [cvData, setCvData] = useState([]);
+  const [cvDataCon, setCvDataCon] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
       try {
         let res = await CallApi("nvbang", "GET");
         console.log(res.data);
-        setApiResults(res.data);
+        setCvData(res.data);
       } catch (error) {
         console.log(error);
       }
@@ -32,62 +32,77 @@ function Row(props) {
     fetchData();
   }, []);
 
-  const fetchSubTableData = async (id) => {
-    try {
-      // trả về mảng con
-      const response = await CallApi(`nvbang?parent_id=${id}`, "GET");
-      const subTableData = response.data;
-      console.log(subTableData);
-    } catch (error) {
-      console.log(error);
-      throw new Error(error.message);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        let res = await CallApi("nvbang", "GET");
+        console.log(res.data);
+        setCvDataCon(res.data);
+      } catch (error) {
+        console.log(error);
+      }
     }
-  };
+
+    fetchData();
+  }, []);
+
+  // const fetchSubTableData = async (id) => {
+  //   try {
+  //     // trả về mảng con
+  //     const response = await CallApi(`nvbang?parent_id=${id}`, "GET");
+  //     const subTableData = response.data;
+  //     console.log(subTableData);
+  //   } catch (error) {
+  //     console.log(error);
+  //     throw new Error(error.message);
+  //   }
+  // };
 
   return (
     <>
-      {apiResults.map((nhanVien, index) => (
-        <TableRow
-          sx={{
-            "& > *": {
-              borderBottom: "unset",
-              fontSize: "1.15rem",
-              height: "20px",
-            },
-          }}
-          key={nhanVien.cv_id}
-        >
-          <TableCell component="th" scope="row">
-            <IconButton
-              aria-label="expand row"
-              size="small"
-              onClick={() => {
-                setOpen(!open);
-                fetchSubTableData(nhanVien.cv_id); // Gửi ID của dòng dữ liệu
-              }}
-            >
-              {open ? <BsChevronDown /> : <GrNext />}
-            </IconButton>
+      {cvData &&
+        cvData.map((cvCha) => (
+          <TableRow
+            sx={{
+              "& > *": {
+                borderBottom: "unset",
+                fontSize: "1.15rem",
+                height: "20px",
+              },
+            }}
+            key={cvCha.cv_id}
+          >
+            <TableCell component="th" scope="row">
+              <IconButton
+                aria-label="expand row"
+                size="small"
+                onClick={() => {
+                  setOpen(!open);
+                  // fetchSubTableData(cvCha.cv_id); // Gửi ID của dòng dữ liệu
+                }}
+              >
+                {open ? <BsChevronDown /> : <GrNext />}
+              </IconButton>
 
-            {nhanVien.cv_ten}
-          </TableCell>
-          <TableCell align="center">{nhanVien.cv_tgthuchien}</TableCell>
-          <TableCell align="center">
-            {moment(nhanVien.cv_hanhoanthanh).format("DD/MM/YYYY")}
-          </TableCell>
-          <TableCell align="center">
-            {moment(nhanVien.cv_thgianhoanthanh).format("DD/MM/YYYY")}
-          </TableCell>
-          <TableCell align="center">
-            {nhanVien.cv_trangthai === "Quá hạn" ? (
-              <span className="text-red-500">{nhanVien.cv_trangthai}</span>
-            ) : (
-              <span>{nhanVien.cv_trangthai}</span>
-            )}
-          </TableCell>
-          <TableCell align="center">{nhanVien.cv_tiendo}%</TableCell>
-        </TableRow>
-      ))}
+              {cvCha.cv_ten}
+            </TableCell>
+            <TableCell align="center">{cvCha.cv_tgthuchien}</TableCell>
+            <TableCell align="center">
+              {moment(cvCha.cv_hanhoanthanh).format("DD/MM/YYYY")}
+            </TableCell>
+            <TableCell align="center">
+              {moment(cvCha.cv_thgianhoanthanh).format("DD/MM/YYYY")}
+            </TableCell>
+            <TableCell align="center">
+              {cvCha.cv_trangthai === "Quá hạn" ? (
+                <span className="text-red-500">{cvCha.cv_trangthai}</span>
+              ) : (
+                <span>{cvCha.cv_trangthai}</span>
+              )}
+            </TableCell>
+            <TableCell align="center">{cvCha.cv_tiendo}%</TableCell>
+          </TableRow>
+        ))}
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
@@ -164,27 +179,28 @@ function Row(props) {
                   </tr>
                 </TableHead>
                 <TableBody>
-                  {row.workSmall.map((workSmallRow) => (
-                    <TableRow key={workSmallRow.id} className="border">
-                      <TableCell component="th" scope="row">
-                        {workSmallRow.title}
-                      </TableCell>
-                      <TableCell align="center">{workSmallRow.actor}</TableCell>
-                      <TableCell align="center">{workSmallRow.time}</TableCell>
-                      <TableCell align="center">
-                        {workSmallRow.deadline}
-                      </TableCell>
-                      <TableCell align="center">
-                        {workSmallRow.completionTime}
-                      </TableCell>
-                      <TableCell align="center">
-                        {workSmallRow.status}
-                      </TableCell>
-                      <TableCell align="center">
-                        {workSmallRow.progress}%
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                  {cvDataCon &&
+                    cvDataCon.map((cvCon) => (
+                      <TableRow key={cvCon.id} className="border">
+                        <TableCell component="th" scope="row">
+                          {cvCon.cv_ten}
+                        </TableCell>
+                        <TableCell align="center">{cvCon.cv_actor}</TableCell>
+                        <TableCell align="center">
+                          {cvCon.cv_hanhoanthanh}
+                        </TableCell>
+                        <TableCell align="center">
+                          {cvCon.cv_tgthuchien}
+                        </TableCell>
+                        <TableCell align="center">
+                          {cvCon.cv_thgianhoanthanh}
+                        </TableCell>
+                        <TableCell align="center">
+                          {cvCon.cv_trangthai}
+                        </TableCell>
+                        <TableCell align="center">{cvCon.cv_tiendo}%</TableCell>
+                      </TableRow>
+                    ))}
                 </TableBody>
               </Table>
             </Box>
