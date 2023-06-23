@@ -6,6 +6,7 @@ import Manager from "./page/Manager/manager";
 import Staff from "./page/Staff/staff";
 import Header from "./page/Component/Header";
 import NavBar from "./page/Component/NavBar";
+import Filter from "./page/Component/FilterMonth";
 //This "/" path is not used
 // const InvalidPage = () => {
 //   return <Redirect to="/login" />;
@@ -20,6 +21,7 @@ function Dashboard() {
       <Route path="/dashboardqlcv/staff" element={<Staff />} />
       <Route path="/dashboardqlcv/header" element={<Header />} />
       <Route path="/dashboardqlcv/navbar" element={<NavBar />} />
+      <Route path="/dashboardqlcv/filter" element={<Filter />} />
     </Routes>
   );
 }

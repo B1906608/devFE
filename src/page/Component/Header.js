@@ -30,7 +30,7 @@ function Header() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await CallApi(selectedOption, "GET"); // truyền selectedOption vào API
+        const res = await CallApi("head", selectedOption, "GET"); // truyền selectedOption vào API
         console.log("Tháng", res);
         // Xử lý dữ liệu trả về
       } catch (error) {
