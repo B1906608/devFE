@@ -54,7 +54,7 @@ function Header() {
   };
 
   return (
-    <div className="flex bg-white  w-full h-[4rem] top-0 items-center border-b shadow-xl">
+    <div className="flex bg-white  w-full h-[4rem] top-0 items-center border-b shadow-lg">
       <div className="flex  w-14 h-14 ml-[10vw]">
         <img className="bg-white" src={Logo} alt="Logo" />
       </div>

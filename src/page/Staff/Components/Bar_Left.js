@@ -32,10 +32,11 @@ function Bar_Left() {
 
     fetchData();
   }, []);
+
   const barSize = data.length <= 10 ? 50 : data.length <= 30 ? 30 : 15;
 
   return (
-    <div className="w-[47vw]">
+    <div className="w-[47vw] mb-3">
       <br />
       <div className="shadow-xl rounded-md bg-white">
         <p className="text-center text-xl font-bold py-3">
@@ -44,6 +45,9 @@ function Bar_Left() {
           {data.find((thang) => thang.name === "TongGioLam")?.value} giờ
         </p>
         <div className="w-full h-[540px] mb-4 flex justify-center">
+          <div className="rotate-90 items-center my-28 h-10 font-bold text-xl">
+            Số giờ
+          </div>
           {data.length !== 0 && (
             <ComposedChart
               width={600}
@@ -74,6 +78,9 @@ function Bar_Left() {
               </Bar>
             </ComposedChart>
           )}
+        </div>
+        <div className="flex justify-center font-bold pb-2 text-xl">
+          Tên công việc
         </div>
       </div>
     </div>

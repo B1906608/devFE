@@ -13,14 +13,14 @@ import {
 } from "recharts";
 
 function Bar_Manager() {
-  const [chart, setChart] = useState([]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
       try {
         let res = await CallApi("ldcot", "GET"); // gọi API để lấy dữ liệu
         console.log("Cột", res.data);
-        setChart(
+        setData(
           res.data.map((number) => {
             number.value = parseInt(number.value);
             return number;
@@ -34,9 +34,7 @@ function Bar_Manager() {
     fetchData();
   }, []);
 
-  const barSize = chart.length <= 10 ? 50 : chart.length <= 30 ? 30 : 15;
-  // const dataMax = Math.max(...chart.map(entry => entry.value)); // tìm giá trị lớn nhất trong mảng dữ liệu
-  // const domainMax = dataMax + 15; // tăng giá trị lớn nhất thêm 5
+  const barSize = data.length <= 10 ? 50 : data.length <= 30 ? 30 : 15;
 
   return (
     <div className="w-[48vw] ml-[3vw] z-1">
@@ -44,14 +42,17 @@ function Bar_Manager() {
       <div className="shadow-2xl rounded-md bg-white">
         <p className="text-center text-xl font-bold py-3">
           Thời gian làm việc của các phòng ban trong tháng{" "}
-          {chart.find((thang) => thang.name === "thang")?.month}
+          {data.find((thang) => thang.name === "thang")?.month}
         </p>
-        <div className="w-full h-[400px] flex justify-center items-center">
-          {chart.length !== 0 && (
+        <div className="w-full h-[400px] flex justify-center items-center pr-8">
+          <div className="rotate-90 items-center mb-28 h-10 mt-1 font-bold text-xl">
+            Số giờ
+          </div>
+          {data.length !== 0 && (
             <ComposedChart
               width={600}
               height={400}
-              data={chart.filter((month) => {
+              data={data.filter((month) => {
                 return month.name !== "thang";
               })}
             >
@@ -69,17 +70,17 @@ function Bar_Manager() {
               />
               <YAxis padding={{ top: 20 }} />
               <Bar dataKey="value" barSize={barSize}>
-                {chart.map((entry, index) => {
+                {data.map((entry, index) => {
                   const fillColor = "#3e92cc"; // thay đổi màu fill tương ứng
                   return <Cell key={`cell-${index}`} fill={fillColor} />;
                 })}
                 <LabelList dataKey="value" position="top" fill="blue" />
               </Bar>
-              <Tooltip
-                formatter={(value, name) => [value + " giờ làm", name]}
-              />
             </ComposedChart>
           )}
+        </div>
+        <div className="flex justify-center font-bold pb-2 text-xl">
+          Tên phòng ban
         </div>
       </div>
     </div>

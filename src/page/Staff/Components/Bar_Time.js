@@ -8,7 +8,6 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
-  Tooltip,
   Cell,
 } from "recharts";
 
@@ -78,9 +77,6 @@ function Bar_Time() {
                 })}
                 <LabelList dataKey="so_gio_lam" position="top" fill="blue" />
               </Bar>
-              <Tooltip
-                formatter={(value, name) => [value + " giờ làm", name]}
-              />
             </ComposedChart>
           )}
         </div>

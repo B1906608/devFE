@@ -7,23 +7,17 @@ import Bar_Manager from "./Components/Bar_Manager";
 
 function Home() {
   return (
-    <div className="bg-[#eff0f5]">
-      <div>
-        <Header />
-      </div>
-      <div>
-        <div className="flex justify-center items-center mb-2">
-          <div>
-            <Bar_Manager />
-          </div>
-          <div>
-            <Pie_Manager />
-          </div>
-        </div>{" "}
+    <div className="bg-[#eff0f5] text-gray-600">
+      <Header />
+      <div className="flex justify-center items-center mb-2">
         <div>
-          <Table />
+          <Bar_Manager />
+        </div>
+        <div>
+          <Pie_Manager />
         </div>
       </div>
+      <Table />
     </div>
   );
 }
