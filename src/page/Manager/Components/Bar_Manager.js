@@ -8,7 +8,6 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
-  Tooltip,
   Cell,
 } from "recharts";
 
@@ -60,9 +59,9 @@ function Bar_Manager() {
               <XAxis
                 dataKey="name"
                 interval={0}
-                angle={70}
+                angle={60}
                 tickMargin={50}
-                height={110}
+                height={130}
                 padding={{ right: 30 }}
                 dx={-15} // Điều chỉnh vị trí của tick
                 dy={-30} // Điều chỉnh vị trí của label
@@ -74,7 +73,13 @@ function Bar_Manager() {
                   const fillColor = "#3e92cc"; // thay đổi màu fill tương ứng
                   return <Cell key={`cell-${index}`} fill={fillColor} />;
                 })}
-                <LabelList dataKey="value" position="top" fill="blue" />
+                <LabelList
+                  dataKey="value"
+                  position="top"
+                  style={{
+                    fontSize: "20px",
+                  }}
+                />
               </Bar>
             </ComposedChart>
           )}

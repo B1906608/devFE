@@ -81,7 +81,7 @@ function Row(props) {
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
       >
-        <th className="text-left font-medium">
+        <th className="text-left font-medium w-[2vw]">
           {/* icon sổ ra cv con */}
           <IconButton
             aria-label="expand row"
@@ -275,7 +275,7 @@ export default function CollapsibleTable() {
             {/* head cha */}
             <TableHead>
               <tr className="text-xl h-14 border-b-2 text-white bg-[#1982c4]">
-                <th className="w-[1vw]"></th>
+                <th className="w-[2vw]"></th>
                 <th className="text-left">
                   <button
                     onClick={() => handleSort("dv_ten")}

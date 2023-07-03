@@ -10,7 +10,7 @@ import Bar_Right from "./Components/Bar_Right";
 
 function Home() {
   return (
-    <div className="bg-[#eff0f5] text-gray-600">
+    <div className="bg-[#f9f8f8] text-gray-600">
       <div>
         <Header />
       </div>

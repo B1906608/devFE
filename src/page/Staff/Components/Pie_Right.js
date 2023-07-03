@@ -6,7 +6,7 @@ function Pie_Right() {
   const [data, setData] = useState([]);
 
   //pie-chart
-  var COLORS = ["#fac858", "#ee6766"];
+  var COLORS = ["#90cb74", "#ee6766"];
 
   useEffect(() => {
     async function fetchData() {

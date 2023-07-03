@@ -7,7 +7,7 @@ import Bar_Manager from "./Components/Bar_Manager";
 
 function Home() {
   return (
-    <div className="bg-[#eff0f5] text-gray-600">
+    <div className="bg-[#f9f8f8] text-gray-600">
       <Header />
       <div className="flex justify-center items-center mb-2">
         <div>

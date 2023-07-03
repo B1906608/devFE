@@ -17,7 +17,7 @@ function Bar_Time() {
   useEffect(() => {
     async function fetchData() {
       try {
-        let res = await CallApi("cotngay", "GET"); // gọi API để lấy dữ liệu
+        let res = await CallApi("cotngay", "GET");
         console.log("Cột trái", res.data);
         setData(
           res.data.map((number) => {
@@ -32,6 +32,7 @@ function Bar_Time() {
 
     fetchData();
   }, []);
+
   const barSize = data.length <= 10 ? 50 : data.length <= 30 ? 30 : 15;
 
   return (
@@ -49,13 +50,13 @@ function Bar_Time() {
             Tổng giờ : {data.find((thang) => thang.name === "tong_gio")?.value}
           </p>
         </div>
-        <div className="w-full h-[400px] flex justify-center pr-20">
+        <div className="w-full h-[400px] flex justify-center pr-10">
           <div className="rotate-90 items-center mb-28 h-20 mt-28 font-bold text-xl">
             Số giờ
           </div>
           {data.length !== 0 && (
             <ComposedChart
-              width={1000}
+              width={1260}
               height={400}
               data={data.filter((month) => {
                 return month.name !== "tong_gio" && month.name !== "thang";
@@ -75,7 +76,13 @@ function Bar_Time() {
                   const fillColor = "#3e92cc"; // thay đổi màu fill tương ứng
                   return <Cell key={`cell-${index}`} fill={fillColor} />;
                 })}
-                <LabelList dataKey="so_gio_lam" position="top" fill="blue" />
+                <LabelList
+                  dataKey="so_gio_lam"
+                  position="top"
+                  style={{
+                    fontSize: "20px",
+                  }}
+                />
               </Bar>
             </ComposedChart>
           )}

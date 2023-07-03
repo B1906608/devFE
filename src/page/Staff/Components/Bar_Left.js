@@ -64,7 +64,7 @@ function Bar_Left() {
                 tickMargin={100}
                 height={200}
                 padding={{ right: 30 }}
-                dx={-20} // Điều chỉnh vị trí của tick
+                dx={0} // Điều chỉnh vị trí của tick
                 dy={-90} // Điều chỉnh vị trí của label
                 textAnchor="start" // Căn lề của label theo hướng end (bên phải)
               />
@@ -74,7 +74,13 @@ function Bar_Left() {
                   const fillColor = "#3e92cc"; // thay đổi màu fill tương ứng
                   return <Cell key={`cell-${index}`} fill={fillColor} />;
                 })}
-                <LabelList dataKey="so_gio_lam" position="top" fill="blue" />
+                <LabelList
+                  dataKey="so_gio_lam"
+                  position="top"
+                  style={{
+                    fontSize: "20px",
+                  }}
+                />
               </Bar>
             </ComposedChart>
           )}

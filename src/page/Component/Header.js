@@ -7,30 +7,31 @@ import { TbLogout } from "react-icons/tb";
 import CallApi from "../../API/CallAPI";
 
 function Header() {
-  const [selectedOption, setSelectedOption] = useState("Tháng 6");
+  const [selectedOption, setSelectedOption] = useState("Tháng 7");
+  const [data, setData] = useState([]);
   const [showOptions, setShowOptions] = useState(false);
-  const [userName, setUserName] = useState("");
-  const [userRole, setUserRole] = useState("");
+  // const [userName, setUserName] = useState("");
+  // const [userRole, setUserRole] = useState("");
   let navigate = useNavigate();
 
-  // useEffect(() => {
-  //   async function fetchUserProfile() {
-  //     try {
-  //       let res = await CallApi("ldcot", "GET");
-  //       console.log("user", res.data);
-  //       setUserName(res.data.name);
-  //       setUserRole(res.data.role);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  //   fetchUserProfile();
-  // }, []);
+  useEffect(() => {
+    async function user() {
+      try {
+        let res = await CallApi("header", "GET");
+        console.log("User", res.data);
+        setData(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    user();
+  }, []);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await CallApi("head", selectedOption, "GET"); // truyền selectedOption vào API
+        const res = await CallApi("nhanvien", selectedOption, "GET"); // truyền selectedOption vào API
         console.log("Tháng", res);
         // Xử lý dữ liệu trả về
       } catch (error) {
@@ -45,6 +46,16 @@ function Header() {
     setShowOptions(false);
   };
 
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleMouseEnter = () => {
+    setShowPopup(true);
+  };
+
+  const handleMouseLeave = () => {
+    setShowPopup(false);
+  };
+
   const ChooseLogout = () => {
     // xóa thông tin đăng nhập được lưu trữ
     localStorage.removeItem("userToken");
@@ -54,14 +65,14 @@ function Header() {
   };
 
   return (
-    <div className="flex bg-white  w-full h-[4rem] top-0 items-center border-b shadow-lg">
-      <div className="flex  w-14 h-14 ml-[10vw]">
+    <div className="flex justify-between bg-white  w-full h-[4rem] top-0 items-center border-b shadow-lg">
+      <div className="flex w-14 h-14 ml-[2vw]">
         <img className="bg-white" src={Logo} alt="Logo" />
       </div>
-      <h1 className="text-[2.5rem] font-bold text-gray-500 ml-[5vw]">
+      <h1 className="text-[2.5rem] font-bold text-gray-500 mr-[10vw]">
         TRANG QUẢN TRỊ
       </h1>
-      <div className="ml-[33vw] flex w-36">
+      <div className="flex ml-[30vw] w-36">
         <div className="z-10 position">
           <div className="relative">
             <button
@@ -204,20 +215,34 @@ function Header() {
           </div>
         </div>
       </div>
-      <div className="mx-[1vw]">
-        <div className="font-bold text-xl">
-          <p>{userName}</p>
+      {data.map((user) => (
+        <div className="mx-[1vw]">
+          <div className="font-bold text-xl">
+            <p>{user.TenNv}</p>
+          </div>
+          <div className="text-lg">
+            <p>{user.ChucVu}</p>
+          </div>
         </div>
-        <div className="text-lg">
-          <p>{userRole}</p>
-        </div>
-      </div>
-      <button
-        className="flex ml-[1vw] px-2 py-1 bg-[#ee6766] text-white rounded-lg text-[1.2rem] hover:bg-red-600 "
-        onClick={ChooseLogout}
+      ))}
+      <div
+        className="flex mr-[2vw] px-2 py-1 relative"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
-        <TbLogout />
-      </button>
+        <button
+          onClick={ChooseLogout}
+          className="flex mr-[2vw] px-2 py-1 bg-[#ee6766] text-white rounded-lg text-[1.2rem] hover:bg-red-600"
+        >
+          <TbLogout />
+        </button>
+
+        {showPopup && (
+          <div className="absolute py-1 px-2 w-24 bg-[#ee6766] text-white font-bold rounded-lg mt-7 ml-1">
+            Đăng xuất
+          </div>
+        )}
+      </div>
     </div>
   );
 }

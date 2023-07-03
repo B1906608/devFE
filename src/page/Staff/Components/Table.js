@@ -11,7 +11,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { BiDownload } from "react-icons/bi";
-import { TbArrowsSort } from "react-icons/tb";
 import { AiOutlineDown } from "react-icons/ai";
 import { GrNext } from "react-icons/gr";
 import XLSX from "xlsx";
@@ -263,7 +262,7 @@ export default function CollapsibleTable() {
         {/* Phần Excel */}
         <div className="flex w-full h-12 items-center justify-between">
           <p className="ml-5 text-gray-700 text-3xl font-bold">
-            Danh sách đơn vị trực thuộc
+            Danh sách công việc
           </p>
           <button
             onClick={exportToExcel}
@@ -279,7 +278,7 @@ export default function CollapsibleTable() {
           <Table aria-label="collapsible table">
             <TableHead>
               <tr className="text-xl h-14 border-b-2 text-white bg-[#1982c4]">
-                <th className="w-[1vw]"></th>
+                <th className="w-[2vw]"></th>
                 <th className="text-left">
                   <button
                     onClick={() => handleSort("cv_ten")}
@@ -290,7 +289,7 @@ export default function CollapsibleTable() {
                     Tên công việc
                   </button>
                 </th>
-                <th className="w-[15vw]">
+                <th className="text-left">
                   <button
                     onClick={() => handleSort("cv_tgthuchien")}
                     className={`focus:outline-none ${
