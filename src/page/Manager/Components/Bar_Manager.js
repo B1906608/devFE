@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CallApi from "../../../API/CallAPI";
+import ExampleContext from "../../Component/FilterMonth";
 
 import {
   ComposedChart,
@@ -12,26 +13,19 @@ import {
 } from "recharts";
 
 function Bar_Manager() {
-  const [data, setData] = useState([]);
+  const { data: songuyen } = React.useContext(ExampleContext);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        let res = await CallApi("ldcot", "GET"); // gọi API để lấy dữ liệu
-        console.log("Cột", res.data);
-        setData(
-          res.data.map((number) => {
-            number.value = parseInt(number.value);
-            return number;
-          })
-        );
-      } catch (error) {
-        console.log(error);
-      }
-    }
+  let data = songuyen;
 
-    fetchData();
-  }, []);
+  if (!data) {
+    console.log("data", data);
+    return null;
+  }
+
+  data = songuyen.LdCot.map((number) => {
+    number.value = parseInt(number.value);
+    return number;
+  });
 
   const barSize = data.length <= 10 ? 50 : data.length <= 30 ? 30 : 15;
 

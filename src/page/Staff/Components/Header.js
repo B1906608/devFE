@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import Logo from "../../img/Logo_VNPT.png";
+import Logo from "../../../img/Logo_VNPT.png";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineDown } from "react-icons/ai";
 import { GrNext } from "react-icons/gr";
 import { TbLogout } from "react-icons/tb";
-import CallApi from "../../API/CallAPI";
-import ExampleContext from "../Component/FilterMonth";
+import CallApi from "../../../API/CallAPI";
+import ExampleContext from "../../Component/FilterMonth";
 
 function Header() {
-  const [selectedOption, setSelectedOption] = useState("Tháng 7");
+  const [selectedOption, setSelectedOption] = useState("Tháng ");
   const [user, setUser] = useState([]);
   const [showOptions, setShowOptions] = useState(false);
   const [month, setMonth] = useState([]);
@@ -35,7 +35,7 @@ function Header() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await CallApi("lanhdao", "GET"); // truyền selectedOption vào API
+        const res = await CallApi("nhanvien", "GET"); // truyền selectedOption vào API
         console.log("Tháng", res);
         // Xử lý dữ liệu trả về
         setMonth(res.data);
@@ -46,17 +46,24 @@ function Header() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (month.length !== 0) {
+      const thang = new Date().getMonth() + 1;
+      handleOptionClick("Tháng " + thang);
+    }
+  }, [month]);
+
   const handleOptionClick = (option) => {
     console.log("Thang", option.split(` `)[1]);
     for (let i in month) {
       console.log("i", i.split(` `)[1]);
-      if (option.split(` `)[1] == i.split(` `)[1]) {
+      if (option.split(` `)[1] === i.split(`_`)[1]) {
         console.log("mon", month[i]);
         setData(month[i][0]);
       }
     }
-    // setSelectedOption(option);
-    // setShowOptions(false);
+    setSelectedOption(option);
+    setShowOptions(false);
   };
 
   const [showPopup, setShowPopup] = useState(false);

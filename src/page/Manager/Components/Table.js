@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
@@ -11,12 +11,11 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { BiDownload } from "react-icons/bi";
-import { TbArrowsSort } from "react-icons/tb";
 import { AiOutlineDown } from "react-icons/ai";
-import { GrNext, GrPrevious } from "react-icons/gr";
+import { GrNext } from "react-icons/gr";
 import XLSX from "xlsx";
 import moment from "moment";
-import CallApi from "../../../API/CallAPI";
+import ExampleContext from "../../Component/FilterMonth";
 
 function Row(props) {
   const { row } = props;
@@ -176,13 +175,26 @@ function Row(props) {
   );
 }
 export default function CollapsibleTable() {
-  const [data, setData] = useState([]);
+  const { data: thang } = React.useContext(ExampleContext);
+
+  const [data, setData] = useState(thang?.LdBang);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [sortState, setSortState] = useState({
     columnName: "",
     direction: "asc",
   });
+
+  useEffect(() => {
+    if (thang) {
+      setData(thang.LdBang);
+    }
+  }, [thang]);
+
+  if (!data) {
+    console.log("data", data);
+    return null;
+  }
 
   function compare(a, b, columnName, direction) {
     const valueA = a[columnName];
@@ -227,20 +239,6 @@ export default function CollapsibleTable() {
 
   // kiểm tra độ dài của mảng data
   const noData = data.length === 0;
-
-  useEffect(() => {
-    async function dataTable() {
-      try {
-        let res = await CallApi("ldbang", "GET");
-        console.log("Bảng", res.data);
-        setData(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
-    dataTable();
-  }, []);
 
   function exportToExcel() {
     const table = document.getElementsByTagName("table")[0]; // lấy table HTML đầu tiên trong document

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Header from "../Component/Header";
+import Header from "./Components/Header";
 import Table from "./Components/Table";
 import Bar_Time from "./Components/Bar_Time";
 import Pie_Left from "./Components/Pie_Left";
