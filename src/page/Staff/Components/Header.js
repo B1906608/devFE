@@ -18,19 +18,19 @@ function Header() {
   // const [userRole, setUserRole] = useState("");
   let navigate = useNavigate();
 
-  // useEffect(() => {
-  //   async function user() {
-  //     try {
-  //       let res = await CallApi("header", "GET");
-  //       console.log("User", res.data);
-  //       setData(res.data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
+  useEffect(() => {
+    async function user() {
+      try {
+        let res = await CallApi("headernv", "GET");
+        console.log("User", res.data);
+        setUser(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
 
-  //   user();
-  // }, []);
+    user();
+  }, []);
 
   useEffect(() => {
     async function fetchData() {
@@ -235,7 +235,7 @@ function Header() {
           </div>
         </div>
       </div>
-      {/* {data.map((user) => (
+      {user.map((user) => (
         <div className="mx-[1vw]">
           <div className="font-bold text-xl">
             <p>{user.TenNv}</p>
@@ -244,8 +244,8 @@ function Header() {
             <p>{user.ChucVu}</p>
           </div>
         </div>
-      ))} */}
-      <div
+      ))}
+      {/* <div
         className="flex mr-[2vw] px-2 py-1 relative"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -262,7 +262,7 @@ function Header() {
             Đăng xuất
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   );
 }

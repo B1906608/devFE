@@ -38,7 +38,7 @@ function Pie_Left() {
       <div className="w-[47vw] shadow-xl rounded-md bg-white">
         <p className="text-center text-xl font-bold py-3">
           Tỷ lệ công việc hoàn thành trong tháng{" "}
-          {data.find((thang) => thang.name === "thang")?.month}
+          {/* {data.find((thang) => thang.name === "thang")?.month} */}
         </p>
         <div className="flex justify-center items-center">
           {data.length !== 0 && (

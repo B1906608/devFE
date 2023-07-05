@@ -41,7 +41,7 @@ function Pie_Manager() {
       <div className="w-[45vw] shadow-2xl rounded-md bg-white">
         <p className="text-center text-xl font-bold py-3">
           Tỉ lệ công viêc trong tháng{" "}
-          {data.find((thang) => thang.name === "thang")?.month}
+          {/* {data.find((thang) => thang.name === "thang")?.month} */}
         </p>
         <div className="flex justify-center items-center">
           {data.length !== 0 && (

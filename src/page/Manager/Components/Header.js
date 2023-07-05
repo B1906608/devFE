@@ -245,7 +245,7 @@ function Header() {
           </div>
         </div>
       ))}
-      <div
+      {/* <div
         className="flex mr-[2vw] px-2 py-1 relative"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -262,7 +262,7 @@ function Header() {
             Đăng xuất
           </div>
         )}
-      </div>
+      </div> */}
     </div>
   );
 }
